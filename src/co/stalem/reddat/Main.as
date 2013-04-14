@@ -83,9 +83,9 @@ package co.stalem.reddat
 			context3D.setProgram(program);
 			
 			var m:Matrix3D = new Matrix3D();
-			m.appendRotation(Math.sin(getTimer() / 800) * 180, Vector3D.Y_AXIS);
-			m.appendRotation(Math.cos(getTimer() / 600) * 180, Vector3D.Z_AXIS);
-			m.appendRotation(Math.cos(getTimer() / 400) * 180, Vector3D.X_AXIS);
+			m.appendRotation(Math.sin(getTimer() / 1600) * 180, Vector3D.Y_AXIS);
+			m.appendRotation(Math.cos(getTimer() / 1400) * 180, Vector3D.Z_AXIS);
+			m.appendRotation(Math.cos(getTimer() / 1200) * 180, Vector3D.X_AXIS);
 			m.appendTranslation(0, 0, .5);
 			context3D.setProgramConstantsFromMatrix(Context3DProgramType.VERTEX, 0, m, true);
 			

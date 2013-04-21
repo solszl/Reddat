@@ -13,7 +13,8 @@ package co.stalem.reddat
 		
 		public function RScene() 
 		{
-			
+			_meshes = new Vector.<RMesh>;
+			_cameras = new Vector.<RCamera>;
 		}
 	}
 

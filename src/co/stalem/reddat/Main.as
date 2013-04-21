@@ -39,20 +39,21 @@ package co.stalem.reddat
 			
 			var vertices:Vector.<Number> = Vector.<Number>([
 																-0.3,-0.3, 0, .7, .7, .75, // x, y, z, r, g, b
-																-0.3, 0.3, 0, .7, .7, .75,
-																 0.3, 0.3, 0, .7, .7, .75
+																-0.3, 0.3, 0, .4, .4, .45,
+																 0.3, 0.3, 0, .1, .1, .15,
+																 0.3,-0.3, 0, .4, .4, .45
 															]);
 															
 			// Create VertexBuffer3D. 3 vertices, of 6 Numbers each
-			vertexbuffer = context3D.createVertexBuffer(3, 6);
+			vertexbuffer = context3D.createVertexBuffer(4, 6);
 			// Upload VertexBuffer3D to GPU. Offset 0, 3 vertices
-			vertexbuffer.uploadFromVector(vertices, 0, 3);
+			vertexbuffer.uploadFromVector(vertices, 0, 4);
 			
-			var indices:Vector.<uint> = Vector.<uint>([0, 1, 2]);
+			var indices:Vector.<uint> = Vector.<uint>([0, 1, 2, 2, 3, 0]);
 			// Create IndexBuffer3D. Total of 3 indices. 1 triangle of 3 vertices
-			indexbuffer = context3D.createIndexBuffer(3);			
+			indexbuffer = context3D.createIndexBuffer(6);			
 			// Upload IndexBuffer3D to GPU. Offset 0, count 3
-			indexbuffer.uploadFromVector (indices, 0, 3);
+			indexbuffer.uploadFromVector (indices, 0, 6);
 			
 			var vertexShaderAssembler:AGALMiniAssembler = new AGALMiniAssembler();
 			vertexShaderAssembler.assemble( Context3DProgramType.VERTEX,
@@ -62,13 +63,13 @@ package co.stalem.reddat
 
 			var fragmentShaderAssembler:AGALMiniAssembler = new AGALMiniAssembler();
 			fragmentShaderAssembler.assemble( Context3DProgramType.FRAGMENT,
-				"mov oc, v0 "
+				"mov oc, v0"
 			);
 
 			program = context3D.createProgram();
 			program.upload( vertexShaderAssembler.agalcode, fragmentShaderAssembler.agalcode);
 		}
-		private var zp:Number = 0;
+		
 		protected function onRender ( e:Event = null ) : void
 		{
 			if (!context3D)

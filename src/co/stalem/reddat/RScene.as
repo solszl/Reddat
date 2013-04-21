@@ -8,8 +8,8 @@ package co.stalem.reddat
 	public class RScene 
 	{
 		// Contains all meshes
-		protected var _meshes:RMesh;
-		protected var _cameras:RCamera;
+		protected var _meshes:Vector.<RMesh>;
+		protected var _cameras:Vector.<RCamera>;
 		
 		public function RScene() 
 		{

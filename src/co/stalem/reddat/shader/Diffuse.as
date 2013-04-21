@@ -13,7 +13,7 @@ package co.stalem.reddat.shader
 			
 			_vertProg = "m44 op, va0, vc0\n" +
 						"mov v0, va1";
-			_fragProg = 
+			_fragProg = "mov oc, v0";
 		}
 		
 	}

@@ -9,12 +9,9 @@ package co.stalem.reddat
 	{
 		public var id:int;
 		
-		private var _event:RSceneUpdateEvent;
-		
 		public function RSceneUpdateEvent( _id:int ) 
 		{
 			id = _id;
-			_event = new RSceneUpdateEvent( _id );
 		}
 		
 	}

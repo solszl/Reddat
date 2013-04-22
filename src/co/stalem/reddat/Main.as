@@ -19,11 +19,11 @@ package co.stalem.reddat
 		protected var indexbuffer:IndexBuffer3D;
 		protected var program:Program3D;
 		
+		private var _scenes:Vector.<RScene>;
+		
 		public function Main():void 
 		{
-			init();
-			
-			stage.addEventListener(Event.ENTER_FRAME, onRender);
+			_scenes = new Vector.<RScene>();
 		}
 		
 		private function init ():void
@@ -32,9 +32,9 @@ package co.stalem.reddat
 			stage.stage3Ds[0].requestContext3D();
 		}
 		
-		protected function initMolehill ( e:Event ) : void
+		private function onSceneUpdate ( e:RSceneUpdateEvent ) : void
 		{
-			context3D = stage.stage3Ds[0].context3D;
+			/*context3D = stage.stage3Ds[0].context3D;
 			context3D.configureBackBuffer(800, 600, 2, true);
 			
 			var vertices:Vector.<Number> = Vector.<Number>([
@@ -67,10 +67,21 @@ package co.stalem.reddat
 			);
 
 			program = context3D.createProgram();
-			program.upload( vertexShaderAssembler.agalcode, fragmentShaderAssembler.agalcode);
+			program.upload( vertexShaderAssembler.agalcode, fragmentShaderAssembler.agalcode);*/
+			
 		}
 		
-		protected function onRender ( e:Event = null ) : void
+		/**
+		 * Request a scene instance
+		 */
+		public function requestScene () : RScene
+		{
+			var s:RScene = new RScene( _scenes.length );
+			s.addEventListener( RSceneUpdateEvent, onSceneUpdate );
+			return s;
+		}
+		
+		private function onRender ( e:Event = null ) : void
 		{
 			if (!context3D)
 				return;

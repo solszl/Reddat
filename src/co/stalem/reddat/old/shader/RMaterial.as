@@ -20,14 +20,14 @@ package co.stalem.reddat.shader
 		protected var _fragProg:String;
 		
 		// Shader program
-		protected var _program:Program3D;
+		public var program:Program3D;
 		// AGAL assemblers
 		private var _vertMiniAsm:AGALMiniAssembler;
 		private var _fragMiniAsm:AGALMiniAssembler;
 		private var _vertMacroAsm:AGALMacroAssembler;
 		private var _fragMacroAsm:AGALMacroAssembler;
 		
-		private var _usingMacro:Boolean = 0;
+		private var _usingMacro:Boolean = false;
 		
 		public function RMaterial() 
 		{
@@ -44,29 +44,35 @@ package co.stalem.reddat.shader
 		 */
 		public function assemble () : void
 		{
-			if (!_program)
+			if (!program)
+			{
 				trace("No Program3D defined");
 				return;
-				
-			if (!_vertProg || _vertProg = "")
+			}
+			
+			if (!_vertProg || _vertProg == "")
+			{
 				trace("No vertex program defined");
 				return;
+			}
 				
-			if (!_fragProg || _fragProg = "")
+			if (!_fragProg || _fragProg == "")
+			{
 				trace("No fragment program defined");
 				return;
+			}
 				
 			if (_usingMacro)
 			{
 				_vertMacroAsm.assemble( Context3DProgramType.VERTEX, _vertProg );
 				_fragMacroAsm.assemble( Context3DProgramType.FRAGMENT, _fragProg );
-				_program.upload( _vertMacroAsm.agalcode, _fragMacroAsm.agalcode );
+				program.upload( _vertMacroAsm.agalcode, _fragMacroAsm.agalcode );
 			}
-			else
+			else if(!_usingMacro)
 			{
 				_vertMiniAsm.assemble( Context3DProgramType.VERTEX, _vertProg );
 				_fragMiniAsm.assemble( Context3DProgramType.FRAGMENT, _fragProg );
-				_program.upload( _vertMiniAsm.agalcode, _fragMiniAsm.agalcode );
+				program.upload( _vertMiniAsm.agalcode, _fragMiniAsm.agalcode );
 			}
 		}
 		
